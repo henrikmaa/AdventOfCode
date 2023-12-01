@@ -24,7 +24,7 @@ public class PuzzleDay1 : Puzzle
         return $"{calibrationValue}";
     }
 
-    public List<string> SplitInputLines()
+    private List<string> SplitInputLines()
     {
         var input = GetInput();
         var splittedList = new List<string>();
@@ -36,7 +36,7 @@ public class PuzzleDay1 : Puzzle
         return splittedList;
     }
 
-    public int ExtractNumbersOnly(string input)
+    private int ExtractNumbersOnly(string input)
     {
         var digits = input.Where(char.IsDigit).Select(c => c - '0').ToList();
 
@@ -45,14 +45,14 @@ public class PuzzleDay1 : Puzzle
         return digits.First() * 10 + digits.Last();
     }
 
-    public int ExtractNumbersWithStringRepresentation(string input)
+    private int ExtractNumbersWithStringRepresentation(string input)
     {
         var numericInputString = ConvertStringNumbersToNumericWeird(input);
         var numericValuesOnly = ExtractNumbersOnly(numericInputString);
         return numericValuesOnly;
     }
 
-    public string ConvertStringNumbersToNumericWeird(string input)
+    private string ConvertStringNumbersToNumericWeird(string input)
     {
         // Because a string can be e.g "twone" add back the start and ending of string to be able to extract both numbers
         // E.g 1 and 2 in this case. If not it would only get two and not one.
