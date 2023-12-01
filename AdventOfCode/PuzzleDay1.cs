@@ -7,60 +7,78 @@ public class PuzzleDay1 : Puzzle
     } 
     public override string Part1()
     {
+        var lines = SplitInputLines();
+        int calibrationValue = 0;
 
-        var sums = GetCaloriesAmounts();
-        
-        var mostCalories = sums.OrderByDescending(n => n).Take(1).ToList();
-        
-        return $"{mostCalories[0]}";
+        foreach (var line in lines)
+        {
+            calibrationValue += ExtractNumbersOnly(line);
+        }
+        return $"{calibrationValue}";
     }
 
     public override string Part2()
     {
-        var sums = GetCaloriesAmounts();
-        
-        var topThree = sums.OrderByDescending(n => n).Take(3).ToList();
+        var lines = SplitInputLines();
+        int calibrationValue = 0;
 
-        var topThreeTotal = topThree[0] + topThree[1] + topThree[2];
-        return $"{topThreeTotal}";
+        foreach (var line in lines)
+        {
+            calibrationValue += ExtractNumbersWithStringRepresentation(line);
+        }
+        return $"{calibrationValue}";
     }
 
-    public List<int> GetCaloriesAmounts()
+    public List<string> SplitInputLines()
     {
-        
-
         var input = GetInput();
+        var splittedList = new List<string>();
         
-        string[] lines = input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-
-        List<int> sums = new List<int>();
-        int currentSum = 0;
-
-        foreach (string line in lines)
-        {
-            if (string.IsNullOrEmpty(line))
-            {
-                if (currentSum > 0)
-                {
-                    sums.Add(currentSum);
-                    currentSum = 0;
-                }
-            }
-            else
-            {
-                if (int.TryParse(line, out int number))
-                {
-                    currentSum += number;
-                }
-            }
-        }
+        var lines = input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
         
-        if (currentSum > 0)
+        foreach (var line in lines)
         {
-            sums.Add(currentSum);
+            splittedList.Add(line);
         }
 
-        return sums;
+        return splittedList;
+    }
+    public int ExtractNumbersOnly(string input)
+    {
+        var digits = input.Where(char.IsDigit).Select(c => c - '0').ToList();
+
+        if (!digits.Any())
+        {
+            return 0;
+        }
+
+        return digits.First() * 10 + digits.Last();
+    }
+    
+    public int ExtractNumbersWithStringRepresentation(string input)
+    {
+
+        var numericInputString = ConvertStringNumbersToNumericWeird(input);
+        var numericValuesOnly = ExtractNumbersOnly(numericInputString);
+        return numericValuesOnly;
+    }
+    
+    public string ConvertStringNumbersToNumericWeird(string input)
+    {
+        // Because a string can be e.g "twoone" add back the start and ending of string to be able to extract both numbers
+        // E.g 1 and 2 in this case. If not it would only get two and not one.
+        input = input
+            .Replace("one", "o1e")
+            .Replace("two", "t2o")
+            .Replace("three", "t3e")
+            .Replace("four", "f4r")
+            .Replace("five", "f5e")
+            .Replace("six", "s6x") 
+            .Replace("seven", "s7n")
+            .Replace("eight", "e8t")
+            .Replace("nine", "n9e");
+
+        return input;
     }
 }
 

@@ -16,7 +16,7 @@ public abstract class AdventureOfCode
         
         var puzzles = new Puzzle[]
         {
-            new PuzzleDay1(await InputFetcher.FetchPuzzleInputAsync(2022, 1)),
+            new PuzzleDay1(await InputFetcher.FetchPuzzleInputAsync(2023, 1)),
         }; 
         
         for (int i = 0; i < puzzles.Length; i++)
