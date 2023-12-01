@@ -54,7 +54,7 @@ public class PuzzleDay1 : Puzzle
 
     public string ConvertStringNumbersToNumericWeird(string input)
     {
-        // Because a string can be e.g "twoone" add back the start and ending of string to be able to extract both numbers
+        // Because a string can be e.g "twone" add back the start and ending of string to be able to extract both numbers
         // E.g 1 and 2 in this case. If not it would only get two and not one.
         input = input
             .Replace("one", "o1e")
