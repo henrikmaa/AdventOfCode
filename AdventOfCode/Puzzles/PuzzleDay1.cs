@@ -9,31 +9,26 @@ public class PuzzleDay1 : Puzzle
     public override string Part1()
     {
         var lines = SplitInputLines();
-        var calibrationValue = 0;
+        var calibrationValue = lines.Sum(ExtractNumbersOnly);
 
-        foreach (var line in lines) calibrationValue += ExtractNumbersOnly(line);
         return $"{calibrationValue}";
     }
 
     public override string Part2()
     {
         var lines = SplitInputLines();
-        var calibrationValue = 0;
+        var calibrationValue = lines.Sum(ExtractNumbersWithStringRepresentation);
 
-        foreach (var line in lines) calibrationValue += ExtractNumbersWithStringRepresentation(line);
         return $"{calibrationValue}";
     }
 
-    private List<string> SplitInputLines()
+    private IEnumerable<string> SplitInputLines()
     {
         var input = GetInput();
-        var splittedList = new List<string>();
 
         var lines = input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
 
-        foreach (var line in lines) splittedList.Add(line);
-
-        return splittedList;
+        return lines.ToList();
     }
 
     private static int ExtractNumbersOnly(string input)
