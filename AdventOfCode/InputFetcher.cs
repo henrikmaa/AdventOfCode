@@ -5,9 +5,9 @@ namespace AdventOfCode
     {
         private static readonly HttpClient HttpClient = new HttpClient();
 
-        private readonly string _sessionToken;
+        private readonly string? _sessionToken;
 
-        public InputFetcher(string sessionToken)
+        public InputFetcher(string? sessionToken)
         {
             _sessionToken = sessionToken;
         }

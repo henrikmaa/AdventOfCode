@@ -6,17 +6,17 @@ namespace AdventOfCode;
 
 public abstract class AdventureOfCode 
 {
-    private static string SessionToken;
-    private static InputFetcher InputFetcher;
+    private static string? _sessionToken;
+    private static InputFetcher? _inputFetcher;
 
     public static async Task Main(string[] args)
     {
-        SessionToken = await File.ReadAllTextAsync("session.txt");
-        InputFetcher = new InputFetcher(SessionToken);
+        _sessionToken = await File.ReadAllTextAsync("session.txt");
+        _inputFetcher = new InputFetcher(_sessionToken);
         
         var puzzles = new Puzzle[]
         {
-            new PuzzleDay1(await InputFetcher.FetchPuzzleInputAsync(2023, 1)),
+            new PuzzleDay1(await _inputFetcher.FetchPuzzleInputAsync(2023, 1)),
         }; 
         
         for (int i = 0; i < puzzles.Length; i++)
