@@ -4,28 +4,23 @@ public class PuzzleDay1 : Puzzle
 {
     public PuzzleDay1(string input) : base(input)
     {
-    } 
+    }
+
     public override string Part1()
     {
         var lines = SplitInputLines();
-        int calibrationValue = 0;
+        var calibrationValue = 0;
 
-        foreach (var line in lines)
-        {
-            calibrationValue += ExtractNumbersOnly(line);
-        }
+        foreach (var line in lines) calibrationValue += ExtractNumbersOnly(line);
         return $"{calibrationValue}";
     }
 
     public override string Part2()
     {
         var lines = SplitInputLines();
-        int calibrationValue = 0;
+        var calibrationValue = 0;
 
-        foreach (var line in lines)
-        {
-            calibrationValue += ExtractNumbersWithStringRepresentation(line);
-        }
+        foreach (var line in lines) calibrationValue += ExtractNumbersWithStringRepresentation(line);
         return $"{calibrationValue}";
     }
 
@@ -33,36 +28,30 @@ public class PuzzleDay1 : Puzzle
     {
         var input = GetInput();
         var splittedList = new List<string>();
-        
+
         var lines = input.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
-        
-        foreach (var line in lines)
-        {
-            splittedList.Add(line);
-        }
+
+        foreach (var line in lines) splittedList.Add(line);
 
         return splittedList;
     }
+
     public int ExtractNumbersOnly(string input)
     {
         var digits = input.Where(char.IsDigit).Select(c => c - '0').ToList();
 
-        if (!digits.Any())
-        {
-            return 0;
-        }
+        if (!digits.Any()) return 0;
 
         return digits.First() * 10 + digits.Last();
     }
-    
+
     public int ExtractNumbersWithStringRepresentation(string input)
     {
-
         var numericInputString = ConvertStringNumbersToNumericWeird(input);
         var numericValuesOnly = ExtractNumbersOnly(numericInputString);
         return numericValuesOnly;
     }
-    
+
     public string ConvertStringNumbersToNumericWeird(string input)
     {
         // Because a string can be e.g "twoone" add back the start and ending of string to be able to extract both numbers
@@ -73,7 +62,7 @@ public class PuzzleDay1 : Puzzle
             .Replace("three", "t3e")
             .Replace("four", "f4r")
             .Replace("five", "f5e")
-            .Replace("six", "s6x") 
+            .Replace("six", "s6x")
             .Replace("seven", "s7n")
             .Replace("eight", "e8t")
             .Replace("nine", "n9e");
@@ -81,4 +70,3 @@ public class PuzzleDay1 : Puzzle
         return input;
     }
 }
-

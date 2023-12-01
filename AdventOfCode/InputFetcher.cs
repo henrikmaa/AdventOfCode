@@ -20,7 +20,7 @@ namespace AdventOfCode
                 
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 request.Headers.Add("Cookie", $"session={_sessionToken}");
-                
+                 
                 var response = await HttpClient.SendAsync(request);
                 
                 if (!response.IsSuccessStatusCode)

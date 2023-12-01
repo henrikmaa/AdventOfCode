@@ -8,7 +8,7 @@ public abstract class Puzzle
     {
         _input = input;
     }
-
+ 
     public string GetInput()
     {
         return _input;
