@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode;
+﻿using AdventOfCode.Puzzles;
+
+namespace AdventOfCode;
 
 public abstract class AdventureOfCode
 {

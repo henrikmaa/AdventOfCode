@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode;
+﻿namespace AdventOfCode.Puzzles;
 
 public class PuzzleDay1 : Puzzle
 {
